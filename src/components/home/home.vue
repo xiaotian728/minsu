@@ -13,7 +13,7 @@
             </el-col>
             <el-col :span="2">
                 <div class="grid-content bg-purple">
-                    <a class="loginout" href="#">退出</a>
+                    <a class="loginout" @click.prevent="handleSignout()" href="#">退出</a>
                 </div>
             </el-col>
         </el-row>
@@ -123,6 +123,16 @@ export default {
         //token 无->登录
         //newVue前自动触发
 
+    },
+    methods:{
+        handleSignout(){
+            //清除token
+            localStorage.clear()
+            //提示
+            this.$message.success('退出成功')
+            //来到login组件
+            this.$router.push({name:'login'})
+        }
     }
 }
 </script>
