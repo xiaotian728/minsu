@@ -20,8 +20,7 @@
     </el-header>
     <el-container>
         <el-aside class="aside" width="200px">
-            <el-menu 
-            :unique-opened="true">
+            <el-menu :unique-opened="true">
                 <!-- 1 -->
                 <el-submenu index="1">
                     <template slot="title">
@@ -112,7 +111,19 @@
 
 <script>
 export default {
+    beforeCreate() {
+        // 获取token
+        const token = localStorage.getItem('token')
+        //if token 有->继续渲染组件
+        if (!token) {
+            this.$router.push({
+                name: 'login'
+            })
+        }
+        //token 无->登录
+        //newVue前自动触发
 
+    }
 }
 </script>
 
