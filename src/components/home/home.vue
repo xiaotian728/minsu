@@ -1,12 +1,59 @@
 <template>
-    <div>home</div>
+<el-container class="container">
+    <el-header class="header">
+        <el-row>
+            <el-col :span="4">
+                <div class="grid-content bg-purple">
+                    <img src="../../assets/logo.jpeg" alt="无法显示图片" width="100px" height="60px">
+                </div>
+            </el-col>
+            <el-col :span="18" class="middle">
+
+               <h3>民宿租赁管理平台</h3>
+            </el-col>
+            <el-col :span="2">
+                <div class="grid-content bg-purple">
+                    <a class="loginout" href="#">退出</a>
+                </div>
+            </el-col>
+        </el-row>
+    </el-header>
+    <el-container>
+        <el-aside class="aside" width="200px">Aside</el-aside>
+        <el-main class="main">Main</el-main>
+    </el-container>
+</el-container>
 </template>
 
 <script>
 export default {
-    
+
 }
 </script>
-<style>
 
+<style>
+.container {
+    height: 100%;
+}
+
+.header {
+    background-color: #a2bcdd;
+}
+
+.aside {
+    background-color: #00A2E9;
+}
+
+.main {
+    background-color: #5e93c9;
+    height: 100%;
+}
+.middle{
+ text-align: center;
+}
+.loginout{
+    
+    line-height: 60px;
+    text-decoration: none;
+}
 </style>

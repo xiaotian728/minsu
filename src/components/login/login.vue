@@ -37,6 +37,11 @@ export default {
                 data,meta:{msg,status}
             } = res.data
             if (status === 200) {
+                //保存token
+                
+                localStorage.setItem('token',data.token)
+
+
                 this.$router.push({name:"home"})
                 //成功提示
                 this.$message.success(msg);
