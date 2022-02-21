@@ -4,10 +4,20 @@ import Vue from 'vue'
 import App from './App'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import router from './router'
+import '@/assets/css/reset.css'
+import MyServerHttp from'@/plugins/http.js'
 
-// 使用vue
+
+import router from './router'
+import axios from 'axios'
+
+
+// 使用vue及其插件（第三方）
 Vue.use(ElementUI)
+Vue.use(MyServerHttp)
+
+
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
