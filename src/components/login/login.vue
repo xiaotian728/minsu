@@ -5,7 +5,7 @@
     label-position="top" 
     label-width="80px" 
     :model="fromdata">
-    <h2>用户登录</h2>
+    <h2>管理员登录</h2>
        <el-form-item label="用户名">
           <el-input v-model="fromdata.username"></el-input>
        </el-form-item>
@@ -29,8 +29,9 @@ export default {
         }
     },
     methods: {
-    handleLogin() {
-        this.$http.post('login',this.fromdata).then(res =>{
+     async handleLogin() {
+         //异步操作转为同步，async和await的使用
+        const res = await this.$http.post('login',this.fromdata)
             // console.log(res)
             const {
                 data,meta:{msg,status}
@@ -43,11 +44,11 @@ export default {
                 this.$message.warning(msg)
             }
             
-        })
+        }
     }
 }
 
-}
+
 </script>
 <style>
 .login-wrap{
