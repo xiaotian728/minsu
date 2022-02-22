@@ -4,13 +4,13 @@
     class="login-form"
     label-position="top" 
     label-width="80px" 
-    :model="fromdata">
+    :model="formdata">
     <h2>管理员登录</h2>
        <el-form-item label="用户名">
-          <el-input v-model="fromdata.username"></el-input>
+          <el-input v-model="formdata.username"></el-input>
        </el-form-item>
        <el-form-item label="密码">
-          <el-input v-model="fromdata.password"></el-input>
+          <el-input v-model="formdata.password"></el-input>
        </el-form-item>
         <el-button 
         @click.prevent="handleLogin"
@@ -22,7 +22,7 @@
 export default {
     data() {
         return {
-            fromdata:{
+            formdata:{
                 username: '',
                 password: ''
             }
@@ -31,7 +31,7 @@ export default {
     methods: {
      async handleLogin() {
          //异步操作转为同步，async和await的使用
-        const res = await this.$http.post('login',this.fromdata)
+        const res = await this.$http.post('login',this.formdata)
             // console.log(res)
             const {
                 data,meta:{msg,status}
@@ -40,7 +40,6 @@ export default {
                 //保存token
                 
                 localStorage.setItem('token',data.token)
-
 
                 this.$router.push({name:"home"})
                 //成功提示
