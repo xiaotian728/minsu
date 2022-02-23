@@ -18,15 +18,19 @@
         </el-col>
     </el-row>
     <!-- 表格 -->
-    <el-table
-    :data="tableData"
-    style="width: 100%">
-    <el-table-column prop="date" label="日期" width="180">
-    </el-table-column>
-    <el-table-column prop="name" label="姓名" width="180">
-    </el-table-column>
-    <el-table-column prop="address" label="地址">
-    </el-table-column>
+    <el-table :data="tableData" style="width: 100%">
+        <el-table-column type="index" label="#" width="60">
+        </el-table-column>
+        <el-table-column prop="name" label="姓名" width="80">
+        </el-table-column>
+        <el-table-column prop="address" label="邮箱">
+        </el-table-column>
+        <el-table-column prop="address" label="创建时间">
+        </el-table-column>
+        <el-table-column prop="address" label="用户状态">
+        </el-table-column>
+        <el-table-column prop="address" label="操作">
+        </el-table-column>
     </el-table>
 
 </el-card>
@@ -37,16 +41,37 @@ export default {
     data() {
         return {
             query: '',
+            pagenum: 1,
+            pagesize: 2,
             tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          }]
-            
+                date: '2016-05-02',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+                date: '2016-05-04',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1517 弄'
+            }]
+
+        }
+    },
+    created() {
+        this.getUserList()
+    },
+    methods: {
+        async getUserList() {
+            //query查询参数可为空
+            //pagenum 当前页码不为空
+            //pagesize 每页显示条数，不为空
+            //需要授权api，必须在请求头中使用Authorization字段提供token令牌
+            const AUTH_TOKEN = localStorage.getItem('token')
+            this.$http.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+            const res = await this.$http.get(
+                `users?query=${this.query}&pagenum=${this.pagenum}&pagesize=${
+                    this.pagesize 
+                 }`
+            )
+            console.log(res)
         }
     }
 }
