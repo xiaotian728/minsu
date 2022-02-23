@@ -54,4 +54,34 @@ beforeCreate() {
    (2)methods:{getUserList(){发送请求}}
   （3）接口文档中除了登录之外的素偶有请求都需要进行授权---设置请求头
   （4）找axios中关于请求头的设置代码
+     const AUTH_TOKEN = localStorage.getItem('token')
      this.$http.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+5.渲染数据--一般数据
+（1）结构赋值，给this.userlist =res.data.users
+（2）prop=""
+6.渲染数据-日期格式处理
+（1）main.js全局过滤器fmtdata
+（2）pro=“creat-time|fmtdata”不行
+
+
+    单元格内容只能显示文本
+    <el-table-column prop="creat_time" label="创建时间">
+            
+            <template slot-scope="userlist">
+                {{userlist.row.create_time | fmtdate}}
+            </template>
+
+        </el-table-column>
+    需要给外层加容器template，不同组件的数据不是共享的，独立作用域
+    最终写法:
+    slot-scope得知会自动去找上级的最外层标签el-table所绑定的数据userlist
+    slot-scppe="scope"此时“scope”==userlist数组
+    scope.row是数组的每个对象
+    scope.row.creat-time要用的数据
+         <el-table-column  label="创建时间">
+            
+            <template slot-scope="userlist">
+                {{userlist.row.create_time | fmtdate}}
+            </template>
+
+        </el-table-column>
